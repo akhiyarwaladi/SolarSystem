@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scene/Tatasurya.unity
+  isLoaded: 1
+  isActive: 1
