@@ -59,6 +59,10 @@ public class Manager : MonoBehaviour {
         {
             for (int i = 0; i < 8; i++)
             {
+                if (Input.GetKey(KeyCode.P))
+                {
+                    planets[i].AddRotation();
+                }
                 planets[i].AddRotation();
                 planets[i].GetRotationNow();
                 planetObjects[i].transform.eulerAngles = planets[i].GetRotation();             
