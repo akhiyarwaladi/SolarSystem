@@ -5,28 +5,16 @@ public class Planet {
     string name;
     float velocity;
     Vector3 rotation;
-    Vector3 position;
     float rotationNow;
     float korX;
     float korY;
     int rotationCount;
-    public void SetPlanet(string _name,float _velocity,Vector3 _rotation,Vector3 _position) {
+    public void SetPlanet(string _name,float _velocity,Vector3 _rotation) {
         name = _name;
         velocity = _velocity;
         rotation = _rotation;
-        position = _position;
         rotationCount = 0;
         rotationNow = 0;
-    }
-
-    public Vector3 GetRotation()
-    {
-        return rotation;
-    }
-
-    public Vector3 GetPosition()
-    {
-        return position;
     }
 
     public float GetVelocity()
@@ -34,9 +22,19 @@ public class Planet {
         return velocity;
     }
 
+    public Vector3 GetRotation()
+    {
+        return rotation;
+    }
+
     public void AddRotation(){
         this.rotation.z += velocity;
         this.rotationNow += velocity;
+    }
+
+    public void ResetRotation()
+    {
+        this.rotation.z = 0;
     }
 
 	public float GetRotationNow()
@@ -44,15 +42,6 @@ public class Planet {
         return rotationNow;
     }
 
-    public float GetKorX()
-    {
-        return this.position.x;
-    }
-
-    public float GetKorY()
-    {
-        return this.position.y;
-    }
 }
 
 

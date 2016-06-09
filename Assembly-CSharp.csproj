@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F38F32DB-B949-E5C6-F932-E829FCF9B0A1}</ProjectGuid>
+    <ProjectGuid>{DB7062D2-755C-EF7A-B5EC-D8E8C8F3F01B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -48,6 +48,7 @@
      <Compile Include="Assets\script\CameraZoom.cs" />
      <Compile Include="Assets\script\Manager.cs" />
      <Compile Include="Assets\script\Planet.cs" />
+     <Compile Include="Assets\script\ZoomInOut.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

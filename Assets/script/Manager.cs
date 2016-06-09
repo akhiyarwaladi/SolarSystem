@@ -7,7 +7,7 @@ public class Manager : MonoBehaviour {
     public GameObject[] moonObjects;
     List<Planet> planets = new List<Planet>();
     List<Moon> moons = new List<Moon>();
-
+	Vector3 cameraPosition,cameraStartPosition;
     private bool Mulai = false;
     public Text merkuriusCount;
     public Text venusCount;
@@ -17,24 +17,27 @@ public class Manager : MonoBehaviour {
     public Text saturnusCount;
     public Text uranusCount;
     public Text neptunusCount;
-    
+
+    public Text planetName;
+    int speed = 1;
+
     void Start () {
         planets.Add(new Planet());
-        planets[0].SetPlanet("Merkurius", 1.533f, new Vector3(0f,0f,0f), new Vector3(0f, 0f, 0f));
+        planets[0].SetPlanet("Merkurius", 1.533f, new Vector3(0f,0f,0f));
         planets.Add(new Planet());
-        planets[1].SetPlanet("Venus", 1.1338f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[1].SetPlanet("Venus", 1.1338f, new Vector3(0f, 0f, 0f));
         planets.Add(new Planet());
-        planets[2].SetPlanet("Bumi", 0.9642f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[2].SetPlanet("Bumi", 0.9642f, new Vector3(0f, 0f, 0f));
         planets.Add(new Planet());
-        planets[3].SetPlanet("Mars", 0.7795f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[3].SetPlanet("Mars", 0.7795f, new Vector3(0f, 0f, 0f));
         planets.Add(new Planet());
-        planets[4].SetPlanet("Jupiter", 0.4227f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[4].SetPlanet("Jupiter", 0.4227f, new Vector3(0f, 0f, 0f));
         planets.Add(new Planet());
-        planets[5].SetPlanet("Saturnus", 0.3121f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[5].SetPlanet("Saturnus", 0.3121f, new Vector3(0f, 0f, 0f));
         planets.Add(new Planet());
-        planets[6].SetPlanet("Uranus", 0.2201f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[6].SetPlanet("Uranus", 0.2201f, new Vector3(0f, 0f, 0f));
         planets.Add(new Planet());
-        planets[7].SetPlanet("Neptunus", 0.1760f, new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f));
+        planets[7].SetPlanet("Neptunus", 0.1760f, new Vector3(0f, 0f, 0f));
 
         moons.Add(new Moon());
         moons[0].SetMoon("Bulan Merkurius", 5f, new Vector3(0f, 0f, 0f));
@@ -52,18 +55,28 @@ public class Manager : MonoBehaviour {
         moons[6].SetMoon("Bulan Uranus", 5f, new Vector3(0f, 0f, 0f));
         moons.Add(new Moon());
         moons[7].SetMoon("Bulan Neptunus", 5f, new Vector3(0f, 0f, 0f));
+
+
+		cameraStartPosition = cameraPosition = Camera.main.transform.position;
     }
 	
 	void Update () {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            speed++;    
+        }
+        else if(Input.GetKeyDown(KeyCode.O))
+        {
+            speed--;
+        }
         if (Mulai)
         {
             for (int i = 0; i < 8; i++)
             {
-                if (Input.GetKey(KeyCode.P))
+                for (int j = 0; j < speed; j++)
                 {
                     planets[i].AddRotation();
                 }
-                planets[i].AddRotation();
                 planets[i].GetRotationNow();
                 planetObjects[i].transform.eulerAngles = planets[i].GetRotation();             
             }
@@ -89,6 +102,8 @@ public class Manager : MonoBehaviour {
             neptunusCount.text = "Neptunus \n Orbit " + ((int)((planets[7].GetRotationNow()) / 359f)).ToString()
                 + "\n Velocity " + planets[7].GetVelocity().ToString() + "\n\n"; ; 
         }
+
+		Camera.main.transform.position = cameraPosition;
     }
 
     public void mulaiSimulasi()
@@ -102,5 +117,28 @@ public class Manager : MonoBehaviour {
         Debug.Log("Berhenti");
         if (Mulai)
             Mulai = false;
+
     }
+    public void resetSimulasi()
+    {
+        Debug.Log("Berhenti");
+        if (Mulai)
+            Mulai = false;
+        for (int i = 0; i < 8; i++)
+        {
+            planets[i].ResetRotation();
+            planetObjects[i].transform.eulerAngles = planets[i].GetRotation();
+        }
+    }
+
+	public void SetCamera(Vector3 pos){
+		cameraPosition = pos;
+		Camera.main.orthographicSize = 3f;
+	}
+
+	public void ReturnCamera(){
+		cameraPosition = cameraStartPosition;
+		Camera.main.orthographicSize = 6.34f;
+	}
+    
 }
